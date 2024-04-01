@@ -33,7 +33,7 @@ def affine_recurrent_cipher(text, a, b, c, d, alphabet):  # Шифрование
                 x = (b + d) % p
                 result += char_dict[((y * char_dict.index(j) + x) % p)]
                 a, c, b, d = c, y, d, x
-    print(f"Зашифровано аффинным рекуррентным шифром : {result}\n")
+    print(f"Результат шифрования : {result}\n")
     return [result, a, b, c, d]
 
 # Расшифровка аффинного рекуррентного шифра
@@ -48,12 +48,12 @@ def decrypt_affine_recurrent_cipher(text, a, b, c, d, alphabet):  # Расшиф
                 x = (b + d) % p
                 result += char_dict[(extended_euclidean(y,p)[0] * (char_dict.index(j) - x)) % p]
                 a, c, b, d = c, y, d, x
-    print(f"Результат расшифровки : {result}\n")
+    print(f"Результат дешифровки : {result}\n")
     return result
 
 # Демонстрация работы
 def main():
-    alphabet = ",- !?./йцукенгшщзхъфывапролджэячстмиьбюЙЦУКЕНГШЩЗХЪЭЖДЛОРПАВЫФЯЧСМИТЬБЮ"
+    alphabet = "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя,-!?. "
     mode = input("Выберите режим (encryption - 'e', decryption - 'd'): ")
     if mode == 'e':  # Если выбран режим шифрования
         plaintext = input("Введите открытый текст для шифрования: ")
