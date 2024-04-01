@@ -13,8 +13,8 @@ def extended_euclidean_algorithm(a, b):
         return (gcd, y - (b // a) * x, x)
 
 # Функция для шифрования/дешифрования текста с использованием аффинного шифра
-def affine_cipher(text, coefficient_a, coefficient_b, alphabet, mode):
-    char_list = list(alphabet)  # Создание списка символов алфавита
+def affine_cipher(text, coefficient_a, coefficient_b, user_alphabet, mode):
+    char_list = list(user_alphabet)  # Создание списка символов алфавита
     result = ""  # Переменная для хранения результата шифрования/дешифрования
     p = len(char_list)  # Длина алфавита
     char_copy = [i for i in char_list]  # Копирование списка символов алфавита
@@ -24,8 +24,10 @@ def affine_cipher(text, coefficient_a, coefficient_b, alphabet, mode):
             if char == j:  # Если символ из текста совпадает с символом из алфавита
                 if mode == 'encrypt':  # Если выбран режим шифрования
                     result += char_copy[((coefficient_a * char_copy.index(j) + coefficient_b) % p)]  # Шифрование
+                    break  # Выход из цикла после шифрования
                 elif mode == 'decrypt':  # Если выбран режим дешифрования
-                    result += char_copy[(a_inv * (char_copy.index(j) - coefficient_b)) % p]  # Дешифрование
+                    result += char_copy[(a_inv * (char_copy.index(j) - coefficient_b + p)) % p]  # Дешифрование
+                    break  # Выход из цикла после дешифрования
     return result
 
 if __name__ == '__main__':
