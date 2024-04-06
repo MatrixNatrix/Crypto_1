@@ -9,7 +9,7 @@ def extended_euclidean(a, b):  # Расширенный алгоритм Евк�
         print("Нет обратного элемента")
         return False
     else:
-        t = 1
+        t = 11
         y = 0.5
         while y % 1 != 0:  # Пока дробная часть не равна нулю
             y = ((1 - t * b) / a) % b
@@ -31,9 +31,9 @@ def affine_recurrent_cipher(text, a, b, c, d, alphabet):  # Шифрование
             if char == j:
                 y = a * c % p
                 x = (b + d) % p
-                result += char_dict[((y * char_dict.index(j) + x) % p)]
+                result += char_dict[((a * char_dict.index(j) + b) % p)]
                 a, c, b, d = c, y, d, x
-    print(f"Результат шифрования : {result}\n")
+    print(f"Зашифровано аффинным рекуррентным шифром : {result}\n")
     return [result, a, b, c, d]
 
 # Расшифровка аффинного рекуррентного шифра
@@ -46,9 +46,10 @@ def decrypt_affine_recurrent_cipher(text, a, b, c, d, alphabet):  # Расшиф
             if char == j:
                 y = a * c % p
                 x = (b + d) % p
-                result += char_dict[(extended_euclidean(y,p)[0] * (char_dict.index(j) - x)) % p]
+                result += char_dict[(extended_euclidean(a,p)[0] * (char_dict.index(j) - b)) % p]
+                1(extended_euclidean(a,p)[0])
                 a, c, b, d = c, y, d, x
-    print(f"Результат дешифровки : {result}\n")
+    print(f"Результат расшифровки : {result}\n")
     return result
 
 # Демонстрация работы
